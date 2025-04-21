@@ -1,0 +1,119 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Lightbox</title>
+    <!-- Menggunakan Tailwind CSS melalui CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Menggunakan Font Awesome untuk ikon (misalnya ikon close dan panah) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        /* Menyembunyikan elemen dengan class "hidden" */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-black flex items-center justify-center h-screen">
+    <!-- Grid gallery untuk menampilkan gambar dalam 3 kolom dengan gap antar gambar -->
+    <div id="gallery" class="grid grid-cols-3 gap-4 p-4">
+        <!-- Setiap gambar di gallery memiliki event 'onclick' untuk membuka lightbox -->
+        <img src="https://storage.googleapis.com/a1aa/image/FFCcepXPPW2WDq74dmlCFkKl5kq9OIFUs36caC7BJRG8Rr0JA.jpg" alt="Image 1" class="cursor-pointer" onclick="openLightbox(0)">
+        <img src="https://placehold.co/800x600?text=Image+2" alt="Image 2" class="cursor-pointer" onclick="openLightbox(1)">
+        <img src="https://placehold.co/800x600?text=Image+3" alt="Image 3" class="cursor-pointer" onclick="openLightbox(2)">
+        <img src="https://placehold.co/800x600?text=Image+4" alt="Image 4" class="cursor-pointer" onclick="openLightbox(3)">
+        <img src="https://placehold.co/800x600?text=Image+5" alt="Image 5" class="cursor-pointer" onclick="openLightbox(4)">
+        <img src="https://placehold.co/800x600?text=Image+6" alt="Image 6" class="cursor-pointer" onclick="openLightbox(5)">
+        <img src="https://placehold.co/800x600?text=Image+7" alt="Image 7" class="cursor-pointer" onclick="openLightbox(6)">
+        <img src="https://placehold.co/800x600?text=Image+8" alt="Image 8" class="cursor-pointer" onclick="openLightbox(7)">
+        <img src="https://placehold.co/800x600?text=Image+9" alt="Image 9" class="cursor-pointer" onclick="openLightbox(8)">
+        <img src="https://placehold.co/800x600?text=Image+10" alt="Image 10" class="cursor-pointer" onclick="openLightbox(9)">
+        <img src="https://placehold.co/800x600?text=Image+11" alt="Image 11" class="cursor-pointer" onclick="openLightbox(10)">
+        <img src="https://placehold.co/800x600?text=Image+12" alt="Image 12" class="cursor-pointer" onclick="openLightbox(11)">
+    </div>
+
+    <!-- Lightbox yang muncul saat gambar diklik -->
+    <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center">
+        <div class="relative z-10">
+            <!-- Bagian header lightbox: Counter dan tombol tutup -->
+            <div class="flex justify-between items-center text-white p-4">
+                <!-- Counter untuk menunjukkan gambar ke berapa -->
+                <span id="image-counter">1 / 12</span>
+                <div class="flex space-x-4">
+                    <!-- Tombol untuk menutup lightbox -->
+                    <i class="fas fa-times cursor-pointer" onclick="closeLightbox()"></i>
+                </div>
+            </div>
+            <!-- Bagian gambar lightbox -->
+            <div class="flex justify-center items-center">
+                <!-- Menampilkan gambar yang sedang dipilih dalam lightbox -->
+                <img id="lightbox-image" alt="Lightbox Image" class="max-w-full max-h-screen" height="600" width="800"/>
+            </div>
+            <!-- Tombol navigasi kiri (untuk gambar sebelumnya) -->
+            <div class="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-2xl cursor-pointer" onclick="prevImage()">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <!-- Tombol navigasi kanan (untuk gambar berikutnya) -->
+            <div class="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-2xl cursor-pointer" onclick="nextImage()">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Array yang berisi URL dari semua gambar di galeri
+        const images = [
+            "https://storage.googleapis.com/a1aa/image/FFCcepXPPW2WDq74dmlCFkKl5kq9OIFUs36caC7BJRG8Rr0JA.jpg",
+            "https://placehold.co/800x600?text=Image+2",
+            "https://placehold.co/800x600?text=Image+3",
+            "https://placehold.co/800x600?text=Image+4",
+            "https://placehold.co/800x600?text=Image+5",
+            "https://placehold.co/800x600?text=Image+6",
+            "https://placehold.co/800x600?text=Image+7",
+            "https://placehold.co/800x600?text=Image+8",
+            "https://placehold.co/800x600?text=Image+9",
+            "https://placehold.co/800x600?text=Image+10",
+            "https://placehold.co/800x600?text=Image+11",
+            "https://placehold.co/800x600?text=Image+12"
+        ];
+
+        // Menyimpan indeks gambar yang sedang dibuka di lightbox
+        let currentIndex = 0;
+
+        // Fungsi untuk membuka lightbox dan menampilkan gambar sesuai indeks yang diklik
+        function openLightbox(index) {
+            currentIndex = index;  // Menyimpan indeks gambar yang diklik
+            updateImage();          // Memperbarui gambar di lightbox
+            // Menyembunyikan galeri dan menampilkan lightbox
+            document.getElementById('gallery').classList.add('hidden');
+            document.getElementById('lightbox').classList.remove('hidden');
+        }
+
+        // Fungsi untuk menutup lightbox dan kembali menampilkan galeri
+        function closeLightbox() {
+            document.getElementById('gallery').classList.remove('hidden');  // Menampilkan galeri
+            document.getElementById('lightbox').classList.add('hidden');    // Menyembunyikan lightbox
+        }
+
+        // Fungsi untuk memperbarui gambar di lightbox berdasarkan indeks saat ini
+        function updateImage() {
+            const imageElement = document.getElementById('lightbox-image');   // Mengambil elemen gambar di lightbox
+            const counterElement = document.getElementById('image-counter');  // Mengambil elemen counter
+            imageElement.src = images[currentIndex];                          // Mengubah sumber gambar
+            counterElement.textContent = `${currentIndex + 1} / ${images.length}`;  // Memperbarui teks counter
+        }
+
+        // Fungsi untuk menampilkan gambar berikutnya
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;  // Menambah indeks dengan modular agar tidak melebihi batas
+            updateImage();  // Memperbarui gambar di lightbox
+        }
+
+        // Fungsi untuk menampilkan gambar sebelumnya
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;  // Mengurangi indeks dengan modular
+            updateImage();  // Memperbarui gambar di lightbox
+        }
+    </script>
+</body>
+</html>

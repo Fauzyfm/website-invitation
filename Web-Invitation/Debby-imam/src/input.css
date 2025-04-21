@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.comments-section {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .form-input {
+
+    font-size: 16px;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .comments-container {
+    max-height: 300px; /* Sesuaikan tinggi maksimal sesuai kebutuhan */
+    overflow-y: auto;  /* Tambahkan scrollbar vertikal jika melebihi max-height */
+    padding: 10px;
+    border: 1px solid #ddd; /* Tambahkan border opsional */
+    border-radius: 5px; /* Untuk tampilan lebih halus */
+    background-color: #f9f9f9; /* Warna latar opsional */
+  }
+  
+  .comment-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .comment-name {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .comment-message {
+    margin-top: 5px;
+    color: #333;
+  }
+  
+  .comment-timestamp {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #888;
+  }
+
+
+      /* Animasi Fade-Up */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .fade-up {
+        animation: fadeUp 1s ease-out;
+      }
+
+.rotate-box {
+  animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+  
+.text-stroke {
+  font-size: 20px; /* Ukuran teks */
+  color: white; /* Warna isi teks */
+  -webkit-text-stroke: 4px white; /* Stroke warna putih dengan ketebalan 1px */
+  text-align: center; /* Pusatkan teks */
+}
