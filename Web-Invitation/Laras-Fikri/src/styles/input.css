@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+
+ /* masukin custom css disini, agar bisa di build */
+
+ /* tailwindcss */
+@theme {
+    --color-merahAti : #6C231D;
+    --color-bgPrimary : #F4DCC4;
+    --color-emas : #E3B982;
+    --color-brisant-balck: #252321;
+    --font-alex-brush: "Alex Brush", cursive;
+    --font-playfair-display: "Playfair Display", serif;
+    --font-poltawski-nowy: "Poltawski Nowy", serif;
+    --font-IBM-plex-serif: "IBM Plex Serif", serif;
+} 
+
+
+/* animasi spin */
+.rotate-box {
+  animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+  
+.text-stroke {
+  font-size: 20px; /* Ukuran teks */
+  color: white; /* Warna isi teks */
+  -webkit-text-stroke: 4px white; /* Stroke warna putih dengan ketebalan 1px */
+  text-align: center; /* Pusatkan teks */
+}
+
+
+/* Animasi Fade-Up */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 1s ease-out;
+}
+
